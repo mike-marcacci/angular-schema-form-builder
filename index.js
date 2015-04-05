@@ -19,7 +19,7 @@ angular.module('schemaFormBuilder', ['schemaForm'])
 					return link.apply(this, arguments);
 
 				// inject the builder controls directive
-				element.attr('sf-builder-controls', '')[0];
+				element.attr('sf-builder-controls', '');
 				$compile(element)(scope);
 			};
 		};
@@ -94,8 +94,13 @@ angular.module('schemaFormBuilder', ['schemaForm'])
 			if(!sfBuilder) return;
 
 
+			// make draggable
+			element.attr('draggable', 'true');
+
+
 			// the controls DOM
-			var controls = angular.element('<div>foo</div>')[0];
+			var controls = angular.element('<div class="sf-builder-controls-handle"></div>')[0];
+			element.addClass('sf-builder-controls');
 
 
 			// add the controls DOM
@@ -121,7 +126,6 @@ angular.module('schemaFormBuilder', ['schemaForm'])
 		}]
 	}
 }])
-
 
 
 
