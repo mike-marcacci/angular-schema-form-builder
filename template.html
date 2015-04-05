@@ -1,5 +1,5 @@
 <style type="text/css">
-	schema-form-builder {
+	sf-builder {
 		display: block;
 		padding: 20px;
 		background: rgb(144, 211, 45);
@@ -13,7 +13,9 @@
 			<div class="panel-title">Types</div>
 		</div>
 		<div class="panel-body">
-			Foo
+			<ul>
+				<li ng-repeat="(type, definition) in types">{{ definition.title || type }}</li>
+			</ul>
 		</div>
 	</div>
 </div>

@@ -1,8 +1,34 @@
-angular.module('builder', ['schemaForm'])
+'use strict';
+
+angular.module('schemaFormBuilder', ['schemaForm'])
 
 
+// extend the decorator with builder controls
+.config(function($provide){
 
-.directive('schemaFormBuilder', [function(){
+	// TODO: we need to extend ALL registered decorators somehow...
+	$provide.decorator('bootstrapDecoratorDirective', function ($delegate, $compile) {
+		var directive = $delegate[0];
+		var link = directive.link;
+
+		directive.compile = function(){
+			return function(scope, element, attrs){
+
+				// we've already injected the builder controls directive
+				if(typeof attrs.sfBuilderControls !== 'undefined')
+					return link.apply(this, arguments);
+
+				// inject the builder controls directive
+				element.attr('sf-builder-controls', '')[0];
+				$compile(element)(scope);
+			};
+		};
+
+		return $delegate;
+	});
+})
+
+.directive('sfBuilder', [function(){
 	return {
 		templateUrl: 'template.html',
 		restrict: 'EA',
@@ -13,33 +39,88 @@ angular.module('builder', ['schemaForm'])
 			form: '=sfBuilderForm'
 		},
 		link: function link(scope, element, attrs, controller, transclude) {
-			
+
 		},
 		controller: ['$scope', function($scope){
 			$scope.model = {};
+
+
+			$scope.types = {
+				text: {
+					title: 'Text',
+					schema: {
+						type: 'object',
+						properties: {
+							title:  { 'type': 'string' },
+							description:  { 'type': 'string' }
+						}
+					},
+					form: [
+						'title',
+						'description'
+					]
+				},
+				password: {
+					title: 'Password',
+					schema: {
+						type: 'object',
+						properties: {
+							title:  { 'type': 'string' },
+							description:  { 'type': 'string' }
+						}
+					},
+					form: [
+						'title',
+						'description'
+					]
+				}
+			}
+
+
 		}]
 	}
 }])
 
 
+.directive('sfBuilderControls', [function(){
+	return {
+		restrict: 'A',
+		require: '?^^sfBuilder',
+		priority: -1000,
+		scope: false,
+		link: function link(scope, element, attrs, sfBuilder) {
+
+			// only apply this if we're inside 
+			if(!sfBuilder) return;
 
 
+			// the controls DOM
+			var controls = angular.element('<div>foo</div>')[0];
 
 
+			// add the controls DOM
+			element.append(controls);
 
+			// if the controls DOM got removed, add it back
+			new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					for (var i = mutation.removedNodes.length - 1; i >= 0; i--) {
+						if(mutation.removedNodes[i] != controls) continue;
+						element.append(controls);
+					};
+				});
+			}).observe(element[0], {
+				attributes: false,
+				childList: true,
+				characterData: false
+			});
+			 
+		},
+		controller: ['$scope', function($scope){
 
-
-.controller('demo', function($scope){
-	$scope.schema = {
-		"type": "object",
-		"title": "Text",
-		"properties": {
-			"title":  { "type": "string" },
-			"description":  { "type": "string" }
-		}
-	};
-	$scope.form = ["*"];
-})
+		}]
+	}
+}])
 
 
 
