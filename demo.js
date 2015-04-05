@@ -3,11 +3,19 @@ angular.module('demo', ['schemaFormBuilder'])
 .controller('demo', function($scope){
 	$scope.schema = {
 		"type": "object",
-		"title": "Text",
 		"properties": {
-			"title":  { "type": "string" },
-			"description":  { "type": "string" }
+			"name":  { "type": "string" },
+			"email":  { "type": "string" },
+			"password":  { "type": "string" }
 		}
 	};
-	$scope.form = ["*"];
+	$scope.form = [
+		'name',
+		'email',
+		{
+			key: 'password',
+			type: 'password',
+			description: 'This doesn\'t appear to work...'
+		}
+	];
 })

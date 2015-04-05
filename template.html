@@ -5,7 +5,7 @@
 		background: rgb(144, 211, 45);
 	}
 
-	.sf-builder-controls {
+	.sf-builder-decorator {
 		border: 1px solid transparent;
 		position: relative;
 		display: block;
@@ -13,11 +13,11 @@
 		margin: 8px 0;
 	}
 
-	.sf-builder-controls:hover {
+	.sf-builder-decorator:hover {
 		border-color: rgba(0,0,0,0.2);
 	}
 
-	.sf-builder-controls:hover .sf-builder-controls-handle {
+	.sf-builder-decorator:hover .sf-builder-controls-handle {
 		position: absolute;
 		top: -1px;
 		right: 100%;
@@ -30,7 +30,7 @@
 </style>
 
 
-<div class="col-md-3">
+<sf-builder-palette class="col-md-3">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="panel-title">Types</div>
@@ -41,27 +41,31 @@
 			</ul>
 		</div>
 	</div>
-</div>
+</sf-builder-palette>
 
-<div class="col-md-6">
-	Preview
+<sf-builder-designer class="col-md-6">
 	<div
 		sf-model="model"
 		sf-schema="schema"
 		sf-form="form"
 		></div>
-</div>
+</sf-builder-designer>
 
-<div class="col-md-3">
+<sf-builder-inspector class="col-md-3">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="panel-title">Inspector</div>
 		</div>
-		<div class="panel-body">
-			Foo
+		<div class="panel-body" ng-if="!types[inspected.type]">Form type not supported.</div>
+		<div class="panel-body" ng-if="types[inspected.type]">
+			<div
+				sf-model="inspected"
+				sf-schema="types[inspected.type].schema"
+				sf-form="types[inspected.type].form"
+				></div>
 		</div>
 	</div>
-</div>
+</sf-builder-inspector>
 
 <div class="clearfix"></div>
 

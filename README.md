@@ -17,13 +17,13 @@ Secondary Goals
 Strategy
 --------
 
-![Palette, Preview, Inspector](https://rawgithub.com/mike-marcacci/angular-schema-form-builder/master/wireframe.svg)
+![Palette, Designer, Inspector](https://rawgithub.com/mike-marcacci/angular-schema-form-builder/master/wireframe.svg)
 
 ###Palette
 - a list of possible form types, populated from the configured decorator
 - drag a list item to the preview section to insert a new form item
 
-###Preview
+###Designer
 - form is rendered by schema-form
 - uses a dummy model so the user can test validations
 - drag field to reorder

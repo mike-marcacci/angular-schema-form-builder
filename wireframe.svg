@@ -7,6 +7,6 @@
 <rect x="17.9" y="16.9" fill="#DDDDDD" width="120.5" height="226"/>
 <rect x="399.3" y="16.9" fill="#DDDDDD" width="120.5" height="226"/>
 <text transform="matrix(1 0 0 1 58 129.922)" font-family="'MyriadPro-Regular'" font-size="14">Palette</text>
-<text transform="matrix(1 0 0 1 233.1187 129.9214)" font-family="'MyriadPro-Regular'" font-size="14">Form Preview</text>
+<text transform="matrix(1 0 0 1 240 129.9214)" font-family="'MyriadPro-Regular'" font-size="14">Designer</text>
 <text transform="matrix(1 0 0 1 432.1777 129.9216)" font-family="'MyriadPro-Regular'" font-size="14">Inspector</text>
 </svg>

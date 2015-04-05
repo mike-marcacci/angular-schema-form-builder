@@ -19,17 +19,22 @@
 
 	<body ng-app="demo">
 		<div ng-controller="demo">
-			<div
-				sf-model="model"
-				sf-schema="schema"
-				sf-form="form"
-				></div>
 
 			<sf-builder
 				sf-builder-options="options"
 				sf-builder-schema="schema"
 				sf-builder-form="form"
 				></sf-builder>
+
+			<div style="margin: 100px auto; width: 60%;">
+				<p>This is to demonstrate that the presense of the builder doesn't influence any other schema-forms (despite modifying the decorators).</p>
+				<div
+					sf-model="model"
+					sf-schema="schema"
+					sf-form="form"
+					></div>
+			</div>
+
 		</div>
 	</body>
 </html>
